@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#070709]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOUR | Restaurant Management Portal (DHA Raya, Lahore)</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              DEFAULT: '#ff2a2a',
+              hover: '#e01f1f',
+              dark: '#991111',
+              subtle: 'rgba(255, 42, 42, 0.12)'
+            },
+            noir: {
+              950: '#070709',
+              900: '#0a0a0d',
+              800: '#111116',
+              700: '#181820',
+              600: '#22222c'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="h-full bg-[#0a0a0d] text-white flex flex-col antialiased">
+
+  <!-- Mobile Top Bar -->
+  <header class="lg:hidden bg-[#0d0d12] border-b border-white/10 px-4 py-3 flex items-center justify-between z-30">
+    <div class="flex items-center gap-2">
+      <span class="text-xl font-black tracking-tight text-white uppercase">FOUR<span class="logo-dot"></span></span>
+      <span class="text-[10px] font-mono uppercase bg-red/10 text-red border border-red/30 px-1.5 py-0.5 rounded">ADMIN</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="theme-toggle-btn text-xs py-1 px-2" aria-label="Toggle light/dark theme">
+        <i class="theme-icon fa-solid fa-sun text-amber-400"></i>
+      </button>
+      <button id="adminSidebarToggle" class="p-2 text-white hover:text-red text-xl focus:outline-none" aria-label="Toggle Sidebar Menu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="flex-1 flex overflow-hidden relative">
+
+    <!-- Mobile Backdrop -->
+    <div id="adminSidebarBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside id="adminSidebar" class="fixed lg:static inset-y-0 left-0 w-64 bg-[#0d0d14] border-r border-white/10 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col justify-between p-5">
+      
+      <!-- Brand Header -->
+      <div>
+        <div class="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-2xl font-black tracking-tight text-white uppercase">FOUR<span class="logo-dot"></span></span>
+            </div>
+            <p class="text-[10px] font-mono tracking-widest text-gray-400 uppercase mt-0.5">RESTAURANT MANAGEMENT</p>
+          </div>
+          <button id="adminSidebarClose" class="lg:hidden text-gray-400 hover:text-white text-lg">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="space-y-1.5 text-xs font-bold uppercase tracking-wider">
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 active transition-colors" data-tab="dashboard">
+            <i class="fa-solid fa-chart-pie w-4 text-red"></i>
+            <span>Dashboard</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="menu">
+            <i class="fa-solid fa-utensils w-4 text-red"></i>
+            <span>Menu Management</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="categories">
+            <i class="fa-solid fa-layer-group w-4 text-red"></i>
+            <span>Categories (12)</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="orders">
+            <i class="fa-solid fa-bag-shopping w-4 text-red"></i>
+            <span>Orders</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="reservations">
+            <i class="fa-solid fa-calendar-check w-4 text-red"></i>
+            <span>Reservations</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="customers">
+            <i class="fa-solid fa-users w-4 text-red"></i>
+            <span>Customers</span>
+          </button>
+
+          <button class="admin-nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded text-gray-300 hover:text-white hover:bg-white/5 transition-colors" data-tab="settings">
+            <i class="fa-solid fa-gear w-4 text-red"></i>
+            <span>Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Footer Action -->
+      <div class="pt-6 border-t border-white/10 space-y-3">
+        <button type="button" class="theme-toggle-btn w-full text-[11px] py-2 text-center flex items-center justify-center gap-2" aria-label="Toggle light/dark theme">
+          <i class="theme-icon fa-solid fa-sun text-amber-400"></i>
+          <span class="theme-label font-bold">Light Mode</span>
+        </button>
+        <a href="index.html" class="w-full btn-outline-white text-[11px] py-2 text-center flex items-center justify-center gap-2">
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <span>View Public Website</span>
+        </a>
+        <div class="text-[10px] font-mono text-gray-500 text-center">
+          DHA Raya, Lahore • Phase 1
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ================= MAIN CONTENT AREA ================= -->
+    <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#0a0a0d]">
+
+      <!-- TAB 1: DASHBOARD -->
+      <section id="tab-dashboard" class="admin-tab-content space-y-6">
+        
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Restaurant Overview</h1>
+            <p class="text-xs text-gray-400 mt-1">Live metrics for FOUR Restaurant &bull; DHA Raya, Lahore</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button type="button" class="theme-toggle-btn hidden sm:inline-flex text-xs py-1.5 px-3" aria-label="Toggle light/dark theme">
+              <i class="theme-icon fa-solid fa-sun text-amber-400"></i>
+              <span class="theme-label font-bold">Light Mode</span>
+            </button>
+            <div class="px-3 py-1.5 bg-[#16161f] border border-white/10 rounded flex items-center gap-2 text-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="metricLiveStatus" class="font-mono text-white">Checking status...</span>
+            </div>
+            <button class="btn-red text-xs" onclick="openAddItemModal()">
+              <i class="fa-solid fa-plus mr-1"></i> Add Item
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Cards Grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="noir-card p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono uppercase text-gray-400">Total Items</span>
+              <i class="fa-solid fa-utensils text-red text-sm"></i>
+            </div>
+            <p class="text-3xl font-black font-mono text-white" id="metricTotalItems">47</p>
+            <span class="text-[10px] text-gray-500 mt-1 block">Across 12 categories</span>
+          </div>
+
+          <div class="noir-card p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono uppercase text-gray-400">Available</span>
+              <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            </div>
+            <p class="text-3xl font-black font-mono text-emerald-400" id="metricAvailableItems">47</p>
+            <span class="text-[10px] text-gray-500 mt-1 block">Ready for customer ordering</span>
+          </div>
+
+          <div class="noir-card p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono uppercase text-gray-400">Unavailable</span>
+              <i class="fa-solid fa-circle-xmark text-red text-sm"></i>
+            </div>
+            <p class="text-3xl font-black font-mono text-red" id="metricUnavailableItems">0</p>
+            <span class="text-[10px] text-gray-500 mt-1 block">Temporarily out of stock</span>
+          </div>
+
+          <div class="noir-card p-5">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono uppercase text-gray-400">Featured Picks</span>
+              <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+            </div>
+            <p class="text-3xl font-black font-mono text-amber-300" id="metricFeaturedItems">8</p>
+            <span class="text-[10px] text-gray-500 mt-1 block">Highlighted on homepage</span>
+          </div>
+
+        </div>
+
+        <!-- Quick Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+          
+          <!-- Recent Menu Items -->
+          <div class="lg:col-span-8 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-white">Menu Snapshot</h3>
+              <button class="text-xs font-mono text-red hover:underline" onclick="switchAdminTab('menu')">Manage All &rarr;</button>
+            </div>
+            <div class="space-y-2" id="dashboardRecentMenu">
+              <!-- Rendered by admin.js -->
+            </div>
+          </div>
+
+          <!-- Restaurant Information Widget -->
+          <div class="lg:col-span-4 space-y-3">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-white">Branch Details</h3>
+            <div class="noir-card p-5 space-y-3 text-xs">
+              <div>
+                <span class="text-gray-500 block text-[10px] uppercase font-mono">Location</span>
+                <p class="font-bold text-white">Fairways Commercial, Phase 6, DHA Raya, Lahore</p>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[10px] uppercase font-mono">Direct WhatsApp Hotline</span>
+                <p class="font-mono text-red font-bold">0325 1231222</p>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[10px] uppercase font-mono">Kitchen Hours</span>
+                <p class="text-white font-mono">1:00 PM &ndash; 3:00 AM Daily</p>
+              </div>
+              <div>
+                <span class="text-gray-500 block text-[10px] uppercase font-mono">Ordering Status</span>
+                <p class="text-emerald-400 font-mono font-bold">WhatsApp Direct Routing Active</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- TAB 2: MENU MANAGEMENT -->
+      <section id="tab-menu" class="admin-tab-content hidden space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Menu Management</h1>
+            <p class="text-xs text-gray-400 mt-1" id="adminFilteredCount">Showing items...</p>
+          </div>
+          <button class="btn-red text-xs" id="openAddItemBtn">
+            <i class="fa-solid fa-plus mr-1"></i> Add Menu Item
+          </button>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+          <div class="sm:col-span-6 relative">
+            <i class="fa-solid fa-magnifying-glass text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
+            <input 
+              type="text" 
+              id="adminMenuSearch" 
+              placeholder="Search by item name or ingredients..." 
+              class="w-full bg-[#16161f] border border-white/10 rounded pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-red"
+            />
+          </div>
+
+          <div class="sm:col-span-3">
+            <select id="adminCategoryFilter" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-3">
+            <select id="adminAvailabilityFilter" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red">
+              <option value="all">All Statuses</option>
+              <option value="available">Available Only</option>
+              <option value="unavailable">Unavailable Only</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Menu Table Container (Horizontal Scrollable) -->
+        <div class="noir-card overflow-hidden border border-white/10">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-[#16161f] text-[11px] font-mono uppercase tracking-wider text-gray-400 border-b border-white/10">
+                  <th class="py-3 px-4">Image</th>
+                  <th class="py-3 px-4">Item &amp; Description</th>
+                  <th class="py-3 px-4">Category</th>
+                  <th class="py-3 px-4">Price (PKR)</th>
+                  <th class="py-3 px-4">Availability</th>
+                  <th class="py-3 px-4">Featured</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminMenuTableBody" class="divide-y divide-white/5">
+                <!-- Injected by admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 3: CATEGORIES OVERVIEW -->
+      <section id="tab-categories" class="admin-tab-content hidden space-y-6">
+        <div class="pb-4 border-b border-white/10">
+          <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Category Architecture</h1>
+          <p class="text-xs text-gray-400 mt-1">12 official distinct restaurant categories in Phase 1</p>
+        </div>
+
+        <div id="adminCategoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Injected by admin.js -->
+        </div>
+      </section>
+
+      <!-- TAB 4: ORDERS (BACKEND FOUNDATION) -->
+      <section id="tab-orders" class="admin-tab-content hidden space-y-6">
+        <div class="pb-4 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Orders Management</h1>
+            <p class="text-xs text-gray-400 mt-1">Backend Connection Foundation</p>
+          </div>
+          <span class="badge-outline border-amber-500/40 text-amber-300">Phase 1: WhatsApp Routing</span>
+        </div>
+
+        <div class="noir-card p-12 text-center max-w-2xl mx-auto space-y-4">
+          <div class="w-16 h-16 rounded-full bg-red/10 border border-red/30 flex items-center justify-center mx-auto text-red text-2xl">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white uppercase">Orders Active on WhatsApp</h3>
+          <p class="text-xs text-gray-400 leading-relaxed max-w-lg mx-auto">
+            Customer food orders are currently formatted and routed directly to the restaurant's verified WhatsApp hotline (<strong class="text-white">+92 325 1231222</strong>).
+            Persistent database storage, kitchen display system (KDS), and live status tracking will populate in this table once a backend API is integrated in Phase 2.
+          </p>
+          <div class="pt-2">
+            <span class="text-[11px] font-mono text-gray-500 bg-white/5 border border-white/10 px-3 py-1 rounded">
+              Status: WhatsApp Dispatch Active
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: RESERVATIONS (BACKEND FOUNDATION) -->
+      <section id="tab-reservations" class="admin-tab-content hidden space-y-6">
+        <div class="pb-4 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Table Reservations</h1>
+            <p class="text-xs text-gray-400 mt-1">Backend Connection Foundation</p>
+          </div>
+          <span class="badge-outline border-amber-500/40 text-amber-300">Phase 1: WhatsApp Routing</span>
+        </div>
+
+        <div class="noir-card p-12 text-center max-w-2xl mx-auto space-y-4">
+          <div class="w-16 h-16 rounded-full bg-red/10 border border-red/30 flex items-center justify-center mx-auto text-red text-2xl">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white uppercase">Table Requests Active on WhatsApp</h3>
+          <p class="text-xs text-gray-400 leading-relaxed max-w-lg mx-auto">
+            Dine-in reservation requests are validated on the public site and forwarded directly to the DHA Raya management team via WhatsApp.
+            Real-time table slot availability and automated confirmation logs will appear here once backend reservation storage is connected.
+          </p>
+        </div>
+      </section>
+
+      <!-- TAB 6: CUSTOMERS (BACKEND FOUNDATION) -->
+      <section id="tab-customers" class="admin-tab-content hidden space-y-6">
+        <div class="pb-4 border-b border-white/10">
+          <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Customer CRM</h1>
+          <p class="text-xs text-gray-400 mt-1">Customer profiles and order histories</p>
+        </div>
+
+        <div class="noir-card p-12 text-center max-w-2xl mx-auto space-y-4">
+          <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-gray-400 text-2xl">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white uppercase">No Customer Accounts Yet</h3>
+          <p class="text-xs text-gray-400 leading-relaxed max-w-lg mx-auto">
+            Customer profiles, phone logs, and order history tracking will populate automatically when user authentication and order persistence are activated.
+          </p>
+        </div>
+      </section>
+
+      <!-- TAB 7: SETTINGS -->
+      <section id="tab-settings" class="admin-tab-content hidden space-y-6">
+        <div class="pb-4 border-b border-white/10">
+          <h1 class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight">Restaurant Settings</h1>
+          <p class="text-xs text-gray-400 mt-1">Configure metadata, hours, and contacts</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8">
+            <form id="adminSettingsForm" class="noir-card p-6 space-y-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-white mb-2">Location &amp; Contact Information</h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Restaurant Name</label>
+                  <input type="text" value="FOUR Restaurant" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Branch / Area</label>
+                  <input type="text" value="DHA Raya, Lahore" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Full Physical Address</label>
+                <input type="text" value="Fairways Commercial, Phase 6, DHA Raya, Lahore, Pakistan" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">WhatsApp Order Number</label>
+                  <input type="text" value="03251231222" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Phone (Formatted)</label>
+                  <input type="text" value="+92 325 1231222" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-white/10">
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Opening Time (24h)</label>
+                  <input type="time" value="13:00" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Closing Time (24h - Overnight)</label>
+                  <input type="time" value="03:00" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+                </div>
+              </div>
+
+              <button type="submit" class="btn-red text-xs mt-3">
+                Save Restaurant Settings
+              </button>
+            </form>
+          </div>
+
+          <div class="lg:col-span-4 space-y-4">
+            <div class="noir-card p-6 space-y-3">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-white">Menu Data Maintenance</h4>
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Reset the live menu catalog back to the official 47-item factory baseline if testing overrides.
+              </p>
+              <button type="button" id="resetMenuDataBtn" class="btn-outline-red text-xs w-full">
+                <i class="fa-solid fa-rotate-left mr-1"></i> Reset to Factory 47 Items
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ================= ADD / EDIT ITEM MODAL ================= -->
+  <div id="itemModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="noir-card max-w-xl w-full p-6 sm:p-8 rounded-lg border border-red/40 relative max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+        <h3 id="itemModalTitle" class="text-lg font-bold text-white uppercase">Add Menu Item</h3>
+        <button id="closeItemModal" class="text-gray-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="itemForm" class="space-y-4">
+        <div>
+          <label for="itemName" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Item Name *</label>
+          <input type="text" id="itemName" required placeholder="e.g. Classic New York Burger" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="itemCategory" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Category *</label>
+            <select id="itemCategory" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red">
+              <!-- Injected by admin.js -->
+            </select>
+          </div>
+          <div>
+            <label for="itemBadge" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Badge / Tag (Optional)</label>
+            <input type="text" id="itemBadge" placeholder="e.g. TOP SELLER, HOT 🔥" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+          </div>
+        </div>
+
+        <div>
+          <label for="itemDescription" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Description / Ingredients</label>
+          <textarea id="itemDescription" rows="2" placeholder="Describe the food ingredients and flavor profile..." class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red"></textarea>
+        </div>
+
+        <div>
+          <label for="itemImage" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Image URL</label>
+          <input type="url" id="itemImage" placeholder="https://images.unsplash.com/..." class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="itemSpicy" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Spice Level</label>
+            <input type="text" id="itemSpicy" placeholder="e.g. Mild, Medium 🔥, Hot 🔥🔥" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+          </div>
+          
+          <!-- Single Price (Hidden if Pizza with Sizes) -->
+          <div id="singlePriceContainer">
+            <label for="itemPrice" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Price in PKR (Rs.) *</label>
+            <input type="number" id="itemPrice" min="1" placeholder="e.g. 1099" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+          </div>
+        </div>
+
+        <!-- Pizza Sizes Toggle -->
+        <div class="p-3 bg-white/5 rounded border border-white/10 space-y-3">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="itemIsPizza" class="rounded accent-red" />
+            <span class="text-xs font-bold text-white">Enable Pizza Sizes (6", 9", 12")</span>
+          </label>
+
+          <div id="pizzaSizeFields" class="grid grid-cols-3 gap-2 hidden pt-2 border-t border-white/10">
+            <div>
+              <label class="block text-[10px] font-mono uppercase text-gray-400 mb-1">6" Small (Rs.)</label>
+              <input type="number" id="pizzaPrice6" placeholder="e.g. 699" class="w-full bg-[#16161f] border border-white/10 rounded px-2.5 py-1.5 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono uppercase text-gray-400 mb-1">9" Medium (Rs.)</label>
+              <input type="number" id="pizzaPrice9" placeholder="e.g. 1499" class="w-full bg-[#16161f] border border-white/10 rounded px-2.5 py-1.5 text-xs text-white" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono uppercase text-gray-400 mb-1">12" Large (Rs.)</label>
+              <input type="number" id="pizzaPrice12" placeholder="e.g. 1899" class="w-full bg-[#16161f] border border-white/10 rounded px-2.5 py-1.5 text-xs text-white" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Toggles -->
+        <div class="grid grid-cols-2 gap-4 pt-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="itemAvailable" checked class="rounded accent-red" />
+            <span class="text-xs text-gray-200">Item is Available</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="itemFeatured" class="rounded accent-red" />
+            <span class="text-xs text-gray-200">Feature on Homepage</span>
+          </label>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+          <button type="button" id="cancelItemModal" class="btn-outline-white text-xs">
+            Cancel
+          </button>
+          <button type="submit" class="btn-red text-xs">
+            Save Item
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ================= DELETE CONFIRMATION MODAL ================= -->
+  <div id="deleteConfirmModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="noir-card max-w-sm w-full p-6 rounded-lg border border-red/40 text-center space-y-4">
+      <div class="w-12 h-12 rounded-full bg-red/10 border border-red/30 flex items-center justify-center mx-auto text-red text-xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h4 class="text-base font-bold text-white uppercase">Confirm Delete</h4>
+      <p class="text-xs text-gray-300">
+        Delete "<span id="deleteItemName" class="font-bold text-white">this item</span>"? This action cannot be undone.
+      </p>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button type="button" id="cancelDeleteBtn" class="btn-outline-white text-xs">
+          Cancel
+        </button>
+        <button type="button" id="confirmDeleteBtn" class="btn-red text-xs">
+          Delete Item
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/theme.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/menu-data.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

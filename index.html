@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOUR | Unapologetic Food. Electric Energy. — DHA Raya, Lahore</title>
+  <meta name="description" content="A high-octane casual dining destination in DHA Raya, Lahore. Gourmet smash burgers, artisan dough pizzas, and decadent shakes built with zero compromises." />
+  <meta name="theme-color" content="#ff2a2a" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="FOUR Restaurant — DHA Raya, Lahore" />
+  <meta property="og:description" content="Unapologetic comfort food. Electric energy. Gourmet smash burgers, artisan pizzas, and decadent shakes." />
+  <meta property="og:site_name" content="FOUR Restaurant" />
+
+  <!-- Schema.org JSON-LD Structured Data (Verified Information Only) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "FOUR Restaurant",
+    "image": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Fairways Commercial, Phase 6, DHA Raya",
+      "addressLocality": "Lahore",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK"
+    },
+    "telephone": "+923251231222",
+    "servesCuisine": ["Burgers", "Pizza", "Fast Food", "American", "Shakes"],
+    "priceRange": "Rs. 349 - Rs. 2,099",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "13:00",
+        "closes": "03:00"
+      }
+    ],
+    "url": "https://maps.google.com/?q=FOUR+Restaurant+DHA+Raya+Phase+6+Lahore"
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            red: {
+              DEFAULT: '#ff2a2a',
+              hover: '#e01f1f',
+              dark: '#991111',
+              subtle: 'rgba(255, 42, 42, 0.12)'
+            },
+            noir: {
+              950: '#070709',
+              900: '#0a0a0d',
+              800: '#111116',
+              700: '#181820',
+              600: '#22222c'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-[#0a0a0d] text-white selection:bg-red selection:text-white antialiased">
+
+  <!-- ================= TOP APP BAR / HEADER ================= -->
+  <header class="sticky top-0 z-50 w-full bg-[#0a0a0d]/95 backdrop-blur-md border-b border-white/10 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-1 group">
+        <span class="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase">
+          FOUR<span class="logo-dot"></span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-7 text-xs font-bold uppercase tracking-wider text-gray-300">
+        <a href="#home" class="hover:text-red transition-colors">HOME</a>
+        <a href="#menu" class="hover:text-red transition-colors">MENU</a>
+        <a href="#picks" class="hover:text-red transition-colors">PICKS</a>
+        <a href="#experience" class="hover:text-red transition-colors">EXPERIENCE</a>
+        <a href="#book-table" class="hover:text-red transition-colors">RESERVE</a>
+        <a href="#location" class="hover:text-red transition-colors">LOCATION</a>
+      </nav>
+
+      <!-- Right Action Items -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <span class="hidden lg:inline text-[11px] font-mono tracking-widest text-gray-400 uppercase">
+          DHA RAYA • LHR
+        </span>
+
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" title="Toggle Light / Dark Mode" aria-label="Toggle light/dark theme">
+          <i class="theme-icon fa-solid fa-sun text-amber-400"></i>
+          <span class="theme-label hidden xl:inline text-[11px] font-mono font-bold">Light</span>
+        </button>
+
+        <!-- Customer Account -->
+        <button id="accountBtn" class="account-btn p-2 text-white hover:text-red transition-colors" title="Login / Sign Up" aria-label="Customer account">
+          <i class="fa-regular fa-user text-lg"></i>
+        </button>
+
+        <!-- Shopping Bag / Cart Trigger -->
+        <button class="open-cart-btn relative p-2 text-white hover:text-red transition-colors" title="View Order Bag" aria-label="Open shopping bag">
+          <i class="fa-solid fa-bag-shopping text-lg"></i>
+          <span class="cart-count-badge hidden absolute -top-1 -right-1 bg-red text-white text-[10px] font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Solid Red ORDER NOW CTA -->
+        <button class="open-cart-btn btn-red hidden sm:inline-flex" aria-label="Order food online">
+          ORDER NOW
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobileMenuToggle" class="md:hidden text-white hover:text-red text-2xl focus:outline-none" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MOBILE NAVIGATION DRAWER ================= -->
+  <div id="mobileNavDrawer" class="fixed inset-0 z-50 bg-[#0a0a0d]/98 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-between p-8 border-l border-red/30">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-white/10">
+        <span class="text-2xl font-black tracking-tight text-white">FOUR<span class="logo-dot"></span></span>
+        <div class="flex items-center gap-3">
+          <button id="mobileAccountBtn" class="account-btn p-2 text-white hover:text-red" title="Customer account" aria-label="Customer account">
+            <i class="fa-regular fa-user text-lg"></i>
+          </button>
+          <button class="theme-toggle-btn" aria-label="Toggle light/dark theme">
+            <i class="theme-icon fa-solid fa-sun text-amber-400"></i>
+          </button>
+          <button id="closeMobileNav" class="text-gray-400 hover:text-white text-2xl" aria-label="Close Menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <nav class="flex flex-col space-y-6 mt-8 font-bold uppercase tracking-wider text-sm text-gray-200">
+        <a href="#home" class="mobile-nav-link hover:text-red">HOME</a>
+        <a href="#menu" class="mobile-nav-link hover:text-red">MENU (12 CATEGORIES)</a>
+        <a href="#picks" class="mobile-nav-link hover:text-red">TOP PICKS</a>
+        <a href="#experience" class="mobile-nav-link hover:text-red">THE EXPERIENCE</a>
+        <a href="#book-table" class="mobile-nav-link hover:text-red">BOOK A TABLE</a>
+        <a href="#location" class="mobile-nav-link hover:text-red">LOCATION &amp; CONTACT</a>
+        <a href="admin.html" class="mobile-nav-link text-gray-400 hover:text-white pt-4 border-t border-white/10 text-xs">
+          <i class="fa-solid fa-lock text-[10px] mr-1.5 text-red"></i> Admin Dashboard
+        </a>
+      </nav>
+    </div>
+
+    <div class="space-y-3 pt-6 border-t border-white/10">
+      <button class="open-cart-btn mobile-nav-link btn-red w-full text-center">
+        ORDER ONLINE (DHA RAYA)
+      </button>
+      <div class="grid grid-cols-2 gap-2">
+        <a href="tel:+923251231222" class="btn-outline-white text-[11px] py-2 text-center flex items-center justify-center gap-1">
+          <i class="fa-solid fa-phone text-red"></i> Call
+        </a>
+        <a href="https://wa.me/923251231222" target="_blank" rel="noreferrer" class="btn-outline-red text-[11px] py-2 text-center flex items-center justify-center gap-1">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+      <p class="text-[11px] text-center text-gray-500 font-mono">
+        DHA RAYA, LAHORE &bull; 0325 1231222
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= HERO SECTION (MATCHES SCREENSHOT 1) ================= -->
+  <section id="home" class="relative min-h-[88vh] flex items-center justify-center overflow-hidden py-12 lg:py-16 bg-[#0a0a0d]">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Column (60%) -->
+        <div class="lg:col-span-7 space-y-5">
+          
+          <!-- Top Badge -->
+          <div class="inline-flex items-center gap-2 bg-black/70 border border-white/15 px-3 py-1 rounded-sm">
+            <span class="w-2 h-2 bg-red inline-block"></span>
+            <span class="text-[11px] font-mono uppercase tracking-wider text-gray-200 font-bold">
+              DHA RAYA &bull; LAHORE &nbsp;&mdash;&nbsp; <span class="live-status-badge">KITCHEN OPEN NOW</span>
+            </span>
+          </div>
+
+          <!-- Main Bold Headline -->
+          <div class="space-y-0.5">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-white leading-none">
+              FOUR
+            </h1>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+              UNAPOLOGETIC FOOD.
+            </h2>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-red leading-tight">
+              ELECTRIC ENERGY.
+            </h2>
+          </div>
+
+          <!-- Subtitle Description -->
+          <p class="max-w-xl text-sm sm:text-base text-gray-300 font-normal leading-relaxed pt-1">
+            A high-octane casual dining destination in DHA Raya, Lahore. Gourmet smash burgers, artisan dough pizzas, and decadent shakes built with zero compromises.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-3">
+            <button class="open-cart-btn btn-red">
+              <span>ORDER ONLINE</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+            <a href="#menu" class="btn-outline-white">
+              <span>EXPLORE MENU</span>
+            </a>
+            <a href="#book-table" class="btn-outline-red">
+              <i class="fa-solid fa-calendar-check text-xs"></i>
+              <span>BOOK A TABLE</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Column Visual Box (40%) -->
+        <div class="lg:col-span-5 relative">
+          <div class="red-corner-frame overflow-hidden rounded border border-white/10 shadow-2xl bg-black relative">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1000&q=80" alt="FOUR Lahore Restaurant" class="w-full h-80 sm:h-96 object-cover filter brightness-90" />
+            <div class="absolute top-4 right-4">
+              <span class="badge-red font-mono">LAHORE // 2026</span>
+            </div>
+            <div class="absolute bottom-4 right-4 bg-black/90 px-3 py-1 border border-white/15 text-[10px] font-mono text-gray-300 uppercase tracking-wider font-bold">
+              ATMOSPHERE // DHA RAYA
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THE EXPERIENCE SECTION (MATCHES SCREENSHOT 2) ================= -->
+  <section id="experience" class="py-20 lg:py-24 bg-[#0d0d12] relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Text Content -->
+        <div class="lg:col-span-6 space-y-6">
+          
+          <!-- Badge -->
+          <div class="inline-block">
+            <span class="badge-red font-mono">VOL. 01 // THE FOUR EXPERIENCE</span>
+          </div>
+
+          <!-- Bold Headline -->
+          <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+            MORE THAN <br />
+            <span class="text-red">JUST A MEAL.</span>
+          </h2>
+
+          <!-- Italic Quote Block with Red Left Accent -->
+          <blockquote class="border-l-2 border-red pl-4 py-1">
+            <p class="italic text-base sm:text-lg text-gray-200 leading-snug font-serif">
+              "FOUR brings together bold flavors, a modern atmosphere and the kind of food worth coming back for."
+            </p>
+          </blockquote>
+
+          <!-- Paragraph Text -->
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Rooted in the vibrant lifestyle of DHA Raya, Lahore, our kitchen delivers unapologetic comfort food reimagined with premium ingredients, precision techniques, and a pulse of high-spirited energy.
+          </p>
+
+          <!-- Stats Row -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+            <div>
+              <p class="text-xl sm:text-2xl font-black text-white">100%</p>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-0.5">FRESH DAILY</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-black text-red">DHA</p>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-0.5">RAYA LAHORE</p>
+            </div>
+            <div>
+              <p class="text-xl sm:text-2xl font-black text-white">LATE</p>
+              <p class="text-[10px] font-mono uppercase tracking-wider text-gray-400 mt-0.5">NIGHT VIBE</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Framed Dining Table Photo with Red Corners -->
+        <div class="lg:col-span-6">
+          <div class="red-corner-frame relative overflow-hidden rounded border border-white/10 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Atmosphere at DHA Raya Lahore" class="w-full h-80 sm:h-96 object-cover" />
+            <div class="absolute bottom-4 right-4 bg-black/90 px-3 py-1 border border-white/15 text-[10px] font-mono text-gray-300 uppercase tracking-wider font-bold">
+              ATMOSPHERE // DHA RAYA
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CHEF PICKS SPOTLIGHT ================= -->
+  <section id="picks" class="py-20 bg-[#0a0a0d] relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="badge-red mb-2">FLAGSHIP CREATIONS</span>
+          <h2 class="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+            TOP PICKS &amp; CRAVINGS
+          </h2>
+        </div>
+        <button class="open-cart-btn text-xs font-bold uppercase tracking-wider text-red hover:text-white flex items-center gap-1">
+          <span>Order Full 47-Item Menu</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </div>
+
+      <!-- Dynamically rendered from central MENU_DATA -->
+      <div id="featuredPicksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Injected dynamically by js/app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FULL FOOD MENU (12 CATEGORIES) ================= -->
+  <section id="menu" class="py-20 lg:py-24 bg-[#0d0d12] relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="badge-red mb-2">COMPLETE 47-ITEM CATALOG</span>
+        <h2 class="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+          THE COMPLETE MENU
+        </h2>
+        <p class="text-sm text-gray-400 mt-1">
+          Made fresh to order in DHA Raya, Lahore. Prime smash burgers, artisan pizzas, loaded fries, and decadent desserts.
+        </p>
+      </div>
+
+      <!-- 12 Distinct Category Filter Tabs Container -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="categoryTabsContainer">
+        <!-- Injected dynamically by js/app.js -->
+      </div>
+
+      <!-- Active Category Title Indicator -->
+      <div class="mb-6 flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 id="activeCategoryTitle" class="text-lg font-bold uppercase tracking-wider text-white">
+          Beef Smash Burgers
+        </h3>
+        <span class="text-xs font-mono text-gray-400">All prices in Pakistani Rupees (PKR)</span>
+      </div>
+
+      <!-- Food Dynamic Grid -->
+      <div id="foodGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Injected dynamically by js/app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TABLE BOOKING ================= -->
+  <section id="book-table" class="py-20 bg-[#0a0a0d] relative border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="noir-card p-8 sm:p-12 border border-red/30 relative overflow-hidden">
+        
+        <div class="max-w-xl">
+          <span class="badge-red mb-2">DHA RAYA DINING</span>
+          <h2 class="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+            BOOK A TABLE AT FOUR
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-300 mt-2 mb-6 leading-relaxed">
+            Planning a gathering, weekend dinner, or birthday feast? Request your table booking directly. Our team at DHA Raya will confirm availability immediately via WhatsApp.
+          </p>
+
+          <form id="tableBookingForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="resName" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Your Name *</label>
+                <input type="text" id="resName" placeholder="e.g. Hamza Malik" required class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red" />
+              </div>
+              <div>
+                <label for="resPhone" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Mobile Phone *</label>
+                <input type="tel" id="resPhone" placeholder="e.g. 0325 1231222" required class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label for="resGuests" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Party Size</label>
+                <select id="resGuests" class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red">
+                  <option value="2 Persons">2 Persons</option>
+                  <option value="4 Persons">4 Persons</option>
+                  <option value="6 Persons">6 Persons</option>
+                  <option value="8 Persons">8 Persons</option>
+                  <option value="12 Persons (Large Group)">12 Persons (Large Group)</option>
+                </select>
+              </div>
+              <div>
+                <label for="resDate" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Date *</label>
+                <input type="date" id="resDate" required class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red" />
+              </div>
+              <div>
+                <label for="resTime" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Seating Time</label>
+                <select id="resTime" class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red">
+                  <option value="7:00 PM">7:00 PM (Dinner Rush)</option>
+                  <option value="8:30 PM">8:30 PM (Peak Vibe)</option>
+                  <option value="10:00 PM">10:00 PM (Late Night)</option>
+                  <option value="11:30 PM">11:30 PM (Midnight Feast)</option>
+                  <option value="1:00 AM">1:00 AM (Late Night Hangout)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="resNotes" class="block text-[11px] font-mono uppercase text-gray-400 mb-1">Special Requests / Occasion (Optional)</label>
+              <input type="text" id="resNotes" placeholder="e.g. Birthday celebration, outdoor preference" class="w-full bg-[#16161f] border border-white/10 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-red" />
+            </div>
+
+            <button type="submit" class="btn-red w-full sm:w-auto mt-2">
+              <i class="fa-brands fa-whatsapp mr-1 text-sm"></i>
+              <span>REQUEST RESERVATION VIA WHATSAPP</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= LOCATION & CONTACT ================= -->
+  <section id="location" class="py-20 lg:py-24 bg-[#0d0d12] relative border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Info Column -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="badge-red">VISIT US</span>
+          <h2 class="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+            FIND FOUR IN LAHORE
+          </h2>
+          <p class="text-sm text-gray-300 leading-relaxed">
+            Located in the prestigious Fairways Commercial boulevard of DHA Raya, Phase 6, Lahore. Indoor industrial dining and late night takeout.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="noir-card p-5">
+              <i class="fa-solid fa-location-dot text-red text-lg mb-2"></i>
+              <h4 class="text-sm font-bold text-white uppercase">DHA Raya Location</h4>
+              <p class="text-xs text-gray-400 mt-1">Fairways Commercial, Phase 6, DHA Raya, Lahore, Pakistan</p>
+            </div>
+
+            <div class="noir-card p-5">
+              <i class="fa-solid fa-clock text-red text-lg mb-2"></i>
+              <h4 class="text-sm font-bold text-white uppercase">Operating Hours</h4>
+              <p class="text-xs text-gray-300 mt-1"><strong>Monday &ndash; Sunday:</strong></p>
+              <p class="text-xs text-gray-400 live-hours-text">1:00 PM &ndash; 3:00 AM (Late Night Kitchen)</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="https://maps.google.com/?q=FOUR+Restaurant+DHA+Raya+Phase+6+Lahore" target="_blank" rel="noreferrer" class="btn-outline-white text-xs">
+              <i class="fa-solid fa-diamond-turn-right text-red mr-1"></i> Get Directions (Google Maps)
+            </a>
+            <a href="https://wa.me/923251231222" target="_blank" rel="noreferrer" class="btn-outline-red text-xs">
+              <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp: 0325 1231222
+            </a>
+            <a href="tel:+923251231222" class="btn-outline-white text-xs">
+              <i class="fa-solid fa-phone text-red mr-1"></i> Call Now
+            </a>
+          </div>
+        </div>
+
+        <!-- Stylized Map Frame -->
+        <div class="lg:col-span-6">
+          <div class="noir-card p-6 h-80 rounded flex flex-col items-center justify-center text-center relative overflow-hidden border border-red/20">
+            <div class="w-14 h-14 rounded-full bg-red/10 border border-red flex items-center justify-center mb-3">
+              <i class="fa-solid fa-utensils text-red text-xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white uppercase">FOUR RESTAURANT</h4>
+            <p class="text-xs text-gray-400 mt-1">DHA Raya Fairways Commercial &bull; Lahore</p>
+            <p class="text-xs font-mono text-gray-300 mt-1">Direct Hotline: +92 325 1231222</p>
+            <span class="live-status-badge badge-red mt-3">KITCHEN OPEN NOW</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-[#070709] border-t border-white/10 pt-16 pb-12 text-gray-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
+        
+        <div class="space-y-3 md:col-span-2">
+          <span class="text-3xl font-black tracking-tight text-white">FOUR<span class="logo-dot"></span></span>
+          <p class="text-xs text-gray-400 max-w-sm">
+            Unapologetic comfort food. Electric energy. Rooted in DHA Raya, Lahore. Gourmet smash burgers, artisan pizzas, and decadent shakes.
+          </p>
+          <div class="flex gap-3 text-white pt-2">
+            <a href="https://instagram.com/four.lahore" target="_blank" rel="noreferrer" class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center hover:text-red hover:border-red transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/923251231222" target="_blank" rel="noreferrer" class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center hover:text-red hover:border-red transition-colors" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Quick Navigation</h5>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#home" class="hover:text-red transition-colors">Home</a></li>
+            <li><a href="#menu" class="hover:text-red transition-colors">Full Food Menu (47 Items)</a></li>
+            <li><a href="#picks" class="hover:text-red transition-colors">Flagship Picks</a></li>
+            <li><a href="#experience" class="hover:text-red transition-colors">The Experience</a></li>
+            <li><a href="#book-table" class="hover:text-red transition-colors">Table Booking</a></li>
+            <li><a href="admin.html" class="text-gray-400 hover:text-red transition-colors pt-2 block font-mono"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Location &amp; Hotline</h5>
+          <div class="space-y-2 text-xs text-gray-400">
+            <p>Fairways Commercial, Phase 6, DHA Raya, Lahore</p>
+            <p>Hotline: <a href="tel:+923251231222" class="text-white hover:text-red font-mono font-bold">+92 325 1231222</a></p>
+            <p>WhatsApp: <a href="https://wa.me/923251231222" target="_blank" rel="noreferrer" class="text-emerald-400 hover:underline font-mono">0325 1231222</a></p>
+            <p class="text-red font-bold">1:00 PM &ndash; 3:00 AM Daily</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 gap-4">
+        <p>&copy; 2026 FOUR Restaurant. All Rights Reserved. DHA Raya, Lahore.</p>
+        <p class="font-mono">FOUR &bull; UNAPOLOGETIC FOOD. ELECTRIC ENERGY.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= ACCESSIBLE SHOPPING BAG / CART DIALOG ================= -->
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+  <div 
+    id="cartDrawer" 
+    class="cart-drawer p-6" 
+    role="dialog" 
+    aria-modal="true" 
+    aria-labelledby="cartDrawerTitle"
+  >
+    
+    <!-- Cart Header -->
+    <div class="flex items-center justify-between pb-4 border-b border-white/10">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-bag-shopping text-red"></i>
+        <h4 id="cartDrawerTitle" class="text-base font-bold text-white uppercase">Your Food Bag</h4>
+      </div>
+      <button id="closeCartBtn" class="text-gray-400 hover:text-white text-lg" aria-label="Close food bag">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto py-4 space-y-3">
+      <!-- Injected by js/cart.js -->
+    </div>
+
+    <!-- Cart Footer & Checkout Form -->
+    <div class="border-t border-white/10 pt-4 space-y-3">
+      <div class="flex justify-between text-sm font-bold text-white font-mono">
+        <span>SUBTOTAL:</span>
+        <span id="cartSubtotal" class="text-red">Rs. 0</span>
+      </div>
+
+      <div class="space-y-2">
+        <div>
+          <label for="orderCustName" class="block text-[10px] font-mono uppercase text-gray-400 mb-1">Your Full Name *</label>
+          <input type="text" id="orderCustName" placeholder="e.g. Ali Khan" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+        </div>
+
+        <div>
+          <label for="orderCustPhone" class="block text-[10px] font-mono uppercase text-gray-400 mb-1">Mobile Phone *</label>
+          <input type="tel" id="orderCustPhone" placeholder="e.g. 0325 1231222" required class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+        </div>
+
+        <div>
+          <label for="orderTypeSelect" class="block text-[10px] font-mono uppercase text-gray-400 mb-1">Order Type *</label>
+          <select id="orderTypeSelect" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red">
+            <option value="Dine-In (DHA Raya)">Dine-In (DHA Raya)</option>
+            <option value="Takeaway / Pickup">Takeaway / Pickup</option>
+            <option value="Delivery (DHA Lahore)">Delivery (DHA Lahore)</option>
+          </select>
+        </div>
+
+        <!-- Conditional Delivery Address -->
+        <div id="deliveryAddressContainer" class="hidden">
+          <label for="orderDeliveryAddress" class="block text-[10px] font-mono uppercase text-gray-400 mb-1">Delivery Address *</label>
+          <input type="text" id="orderDeliveryAddress" placeholder="House/Plot #, Phase/Sector, DHA Lahore" class="w-full bg-[#16161f] border border-white/10 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-red" />
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button 
+        id="cartWhatsappBtn" 
+        class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-lg"
+        aria-label="Submit food order via WhatsApp"
+      >
+        <i class="fa-brands fa-whatsapp text-base"></i>
+        <span>ORDER VIA WHATSAPP</span>
+      </button>
+
+      <p class="text-[10px] text-center text-gray-500 font-mono">
+        Direct routing to FOUR DHA Raya Hotline
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ================= CUSTOMER AUTH MODAL ================= -->
+  <div id="authModal" class="auth-modal hidden" aria-hidden="true">
+    <div class="auth-backdrop" data-auth-close></div>
+    <section class="auth-panel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button id="authCloseBtn" class="auth-close" aria-label="Close account dialog"><i class="fa-solid fa-xmark"></i></button>
+      <div class="auth-brand">FOUR<span class="logo-dot"></span></div>
+      <p class="auth-kicker">DHA RAYA • LHR</p>
+      <h2 id="authTitle" class="auth-title">Welcome to FOUR</h2>
+      <p id="authSubtitle" class="auth-subtitle">Sign in to manage your reservations, orders and profile.</p>
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" data-auth-mode="login">LOGIN</button>
+        <button type="button" class="auth-tab" data-auth-mode="signup">SIGN UP</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>Email<input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="••••••••"></label>
+        <div class="auth-row"><label class="auth-check"><input id="rememberMe" type="checkbox"> Remember me</label><button type="button" id="forgotPasswordBtn" class="auth-link">Forgot password?</button></div>
+        <button class="auth-submit" type="submit">LOGIN</button>
+      </form>
+
+      <form id="signupForm" class="auth-form hidden">
+        <label>Full Name<input id="signupName" type="text" autocomplete="name" required minlength="2" placeholder="Your full name"></label>
+        <label>Email<input id="signupEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>Phone <span class="optional">(optional)</span><input id="signupPhone" type="tel" autocomplete="tel" placeholder="03xx xxxxxxx"></label>
+        <label>Password<input id="signupPassword" type="password" autocomplete="new-password" required minlength="6" placeholder="At least 6 characters"></label>
+        <label>Confirm Password<input id="signupConfirm" type="password" autocomplete="new-password" required minlength="6" placeholder="Repeat your password"></label>
+        <label class="auth-check"><input id="termsAgree" type="checkbox" required> I agree to the Terms & Conditions.</label>
+        <button class="auth-submit" type="submit">CREATE ACCOUNT</button>
+      </form>
+
+      <div id="accountView" class="account-view hidden">
+        <div class="account-avatar" id="accountAvatar">F</div>
+        <h3 id="accountName">Customer</h3>
+        <p id="accountEmail">email@example.com</p>
+        <div class="account-actions">
+          <button type="button" id="viewReservationsBtn">MY RESERVATIONS</button>
+          <button type="button" id="viewOrdersBtn">MY ORDERS</button>
+          <button type="button" id="logoutBtn" class="danger">LOG OUT</button>
+        </div>
+      </div>
+
+      <p id="authNotice" class="auth-notice" role="status" aria-live="polite"></p>
+      <p class="auth-security-note"><i class="fa-solid fa-lock"></i> Your account stays on this browser in this static demo.</p>
+    </section>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="js/theme.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/menu-data.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/reservations.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
